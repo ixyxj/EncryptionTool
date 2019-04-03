@@ -26,5 +26,26 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     testImplementation 'junit:junit:4.12'
 }
+
+def _BASENAME = 'encrypt-tool'
+def _VERSION = '-0.0.1'
+def _DestinationPath = 'build/libs/'
+def _JAR_NAME = _BASENAME + _VERSION + ".jar"
+
+
+task deleteBuild(type:Delete){
+    delete _DestinationPath + _JAR_NAME
+}
+
+task makeJar(type:Jar){
+    from('build/intermediates/packaged-classes/release/') //从这个目录下取出默认jar包
+    into(_DestinationPath) //将jar包输出到指定目录下
+    include('classes.jar')
+    rename('classes.jar', _JAR_NAME) //自定义jar包的名字
+}
+
+makeJar.dependsOn(deleteBuild, build)
+

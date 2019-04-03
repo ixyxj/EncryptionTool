@@ -1,6 +1,9 @@
 # EncryptionTool
 :boom 常见加密算法
 
+### 新增jar
+./encrypt-0.0.1.jar
+
 ### 常见算法:
 - TYPE_BASE64
 - TYPE_MD5
